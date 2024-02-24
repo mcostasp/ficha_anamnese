@@ -19,32 +19,32 @@ services:
       - "5432:5432"
     volumes:
       - postgres_db:/database/var/lib/postgresql/data
-        
-  cloudbeaver:
-    image: dbeaver/cloudbeaver:latest
-    container_name: dbeaver    
-    restart: "unless-stopped"
+  pgadmin:
+    container_name: PGAdminCont
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=mcostasp@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=1234
     ports:
-      - "8978:8978"
-    volumes:
-      - cloudbeaver:/opt/cloudbeaver/workspace
+      - "5050:80"
+    depends_on:
+      - postgres_db        
 volumes:
   postgres_db:
     driver: local
-  cloudbeaver:
-    driver: local
-#   pgadmin:
-#     container_name: PGAdminCont
-#     image: dpage/pgadmin4
-#     restart: always
-#     environment:
-#       - PGADMIN_DEFAULT_EMAIL=mcostasp@gmail.com
-#       - PGADMIN_DEFAULT_PASSWORD=1234
-#     ports:
-#       - "5050:80"
-#     depends_on:
-#       - postgres_db
+
+
 # volumes:
 #   postgres_db:
 #     driver: local
-
+  # cloudbeaver:
+  #   image: dbeaver/cloudbeaver:latest
+  #   container_name: dbeaver    
+  #   restart: "unless-stopped"
+  #   ports:
+  #     - "8978:8978"
+  #   volumes:
+  #     - cloudbeaver:/opt/cloudbeaver/workspace
+  # cloudbeaver:
+  #   driver: local
