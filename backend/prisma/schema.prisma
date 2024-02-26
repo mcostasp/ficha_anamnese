@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multischema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["core", "customer"]
+}
+
+model data {
+  id             Int       @id @default(autoincrement())
+  first_name     String    @db.VarChar(255)
+  last_name      String    @db.VarChar(255)
+  age            Int
+  birthdate      DateTime  @default(now())
+  marital_status String    @db.VarChar(50)
+  phone          String    @db.VarChar(30)
+  mobile         String    @db.VarChar(30)
+  email          String    @unique @db.VarChar(150)
+  facebook       String    @db.VarChar(50)
+  instagram      String    @db.VarChar(50)
+  profession     String    @db.VarChar(150)
+  address_line1  String    @db.VarChar(255)
+  address_line2  String    @db.VarChar(255)
+  state          String    @db.VarChar(50)
+  province       String    @db.VarChar(50)
+  zipcode        String    @db.VarChar(10)
+  country        String    @db.VarChar(50)
+  created_at     DateTime  @default(now()) @db.Timestamp()
+  form           form[]
+  service        service[]
+
+  @@schema("customer")
+}
+
+model form {
+  id          Int       @id @default(autoincrement())
+  customer    data?     @relation(fields: [customer_id], references: [id])
+  customer_id Int?
+  service     services? @relation(fields: [service_id], references: [id])
+  service_id  Int?
+  yes_no      Boolean   @default(false)
+  long_answer String?   @db.VarChar(255)
+  created_at  DateTime  @default(now()) @db.Timestamp()
+
+  @@schema("customer")
+}
+
+model service {
+  id          Int       @id @default(autoincrement())
+  customer    data?     @relation(fields: [customer_id], references: [id])
+  customer_id Int?
+  service     services? @relation(fields: [service_id], references: [id])
+  service_id  Int
+  created_at  DateTime  @default(now()) @db.Timestamp()
+
+  @@schema("customer")
+}
+
+model forms {
+  id          Int        @id @default(autoincrement())
+  service     services?  @relation(fields: [service_id], references: [id])
+  service_id  Int?
+  questions   questions? @relation(fields: [question_id], references: [id])
+  question_id Int?
+  created_at  DateTime   @default(now()) @db.Timestamp()
+
+  @@schema("core")
+}
+
+model questions {
+  id             Int      @id @default(autoincrement())
+  question       String   @db.VarChar(255)
+  tp_question_id Int
+  created_at     DateTime @default(now()) @db.Timestamp()
+  forms          forms[]
+
+  @@schema("core")
+}
+
+model services {
+  id           Int       @id @default(autoincrement())
+  service_name String    @db.VarChar(150)
+  value        Decimal
+  created_at   DateTime  @default(now()) @db.Timestamp()
+  form         form[]
+  service      service[]
+  forms        forms[]
+
+  @@schema("core")
+}
+
+model type_questions {
+  id         Int      @id @default(autoincrement())
+  type       String   @db.VarChar(50)
+  created_at DateTime @default(now()) @db.Timestamp()
+
+  @@schema("core")
+}
