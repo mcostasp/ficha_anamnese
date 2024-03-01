@@ -1,10 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ficha Anamnese",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest", 
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "keywords": [],
@@ -37,6 +37,8 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/morgan": "^1.9.9",
     "@types/supertest": "^6.0.2",
+    "chai": "^5.1.0",
+    "mocha": "^10.3.0",
     "supertest": "^6.3.4"
   }
 }

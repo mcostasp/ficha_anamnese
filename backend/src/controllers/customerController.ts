@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import createHttpError from "http-errors";
-import { validateCustomer } from "../utils/validator";
+//import createHttpError from "http-errors";
+//import { validateCustomer } from "../utils/validator";
 
 const prisma = new PrismaClient();
 
@@ -12,45 +12,8 @@ class CustomerController {
             // if (error) {
             //     throw createHttpError(400, error.details[0].message);
             // }
-            const {
-                first_name,
-                last_name,
-                age,
-                birthdate,
-                marital_status,
-                phone,
-                mobile,
-                email,
-                facebook,
-                instagram,
-                profession,
-                address_line1,
-                address_line2,
-                state,
-                province,
-                zipcode,
-                country
-            } = req.body;
             const customer = await prisma.data.create({
-                data: {
-                    first_name,
-                    last_name,
-                    age,
-                    birthdate,
-                    marital_status,
-                    phone,
-                    mobile,
-                    email,
-                    facebook,
-                    instagram,
-                    profession,
-                    address_line1,
-                    address_line2,
-                    state,
-                    province,
-                    zipcode,
-                    country
-                }
+                data: req.body,
             });
             res.json(customer);
         } catch (error: any) {
