@@ -2,6 +2,7 @@ import request from 'supertest';
 import app from '../../app';
 
 describe('Ficha Anamnese API', () => {
+    let customerId: number;
     it('should create a new customer', async () => {
         const res = await request(app).post('/api/customer').send({
             first_name: 'Marcelo',
@@ -16,5 +17,20 @@ describe('Ficha Anamnese API', () => {
         
         expect(res.status).toEqual(200);
         expect(res.body).toHaveProperty('id');
-    })
+        customerId = res.body.id;
+    });
+    it('should get the created customer by id', async () => {
+        const res = await request(app).get(`/api/customer/${customerId}`);
+
+        expect(res.status).toEqual(200);
+        expect(res.body).toHaveProperty('first_name');
+    });
+
+    it('should get all the customers', async() => {
+        const res = await request(app).get('/api/customer/');
+
+        expect(res.status).toEqual(200);
+        expect(Array.isArray(res.body)).toBe(true);
+    });
+    
 });
