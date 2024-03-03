@@ -9,5 +9,6 @@ router.get('/', customerController.getAll);
 router.get('/:id', customerController.getById);
 router.put('/:id', customerController.update);
 router.delete('/:id', customerController.delete);
+router.delete('/', customerController.deleteAll);
 
 export default router;
