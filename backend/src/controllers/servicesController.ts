@@ -25,7 +25,7 @@ class ServicesController {
       res.status(500).json({ message: "Failed to get services" });
     }
   }
-
+  
   async deleteAll(req: Request, res: Response): Promise<void> {
     try {
       await prisma.services.deleteMany();

@@ -19,6 +19,7 @@ describe("Ficha Anamnese API - Core Services", () => {
 
     expect(res.status).toEqual(200);
     expect(res.body).toHaveProperty("id");
+    serviceId = res.body.id;
   });
 
   it("should get the service by id", async () => {
@@ -57,7 +58,7 @@ describe("Ficha Anamnese API - Core Services", () => {
 
     const res = await request(app).delete(`/api/services/${newService.id}`);
 
-    expect(res.statusCode).toEqual(200);
+    expect(res.statusCode).toEqual(204);
 
     const deleteService = await prisma.data.findUnique({
         where: { id: newService.id },
