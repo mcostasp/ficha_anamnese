@@ -5,6 +5,7 @@ import { errorHandler } from './middleware/errorMiddleware';
 import customerRoutes from './routes/customerRoutes';
 import servicesRoutes from './routes/servicesRoutes';
 import tpquestionsRoutes from './routes/tpquestionsRoutes';
+import questionsRoutes from './routes/questionsRoutes'
 
 class App {
     public app: Express;
@@ -26,6 +27,7 @@ class App {
         this.app.use('/api/customer', customerRoutes);
         this.app.use('/api/services', servicesRoutes);
         this.app.use('/api/tpquestions', tpquestionsRoutes);
+        this.app.use('/api/questions', questionsRoutes);
     }
 
     private errorHandler(): void {

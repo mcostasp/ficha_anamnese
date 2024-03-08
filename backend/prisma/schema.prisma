@@ -45,10 +45,10 @@ model form {
   id          Int       @id @default(autoincrement())
   yes_no      Boolean?  @default(false)
   long_answer String?   @db.VarChar(255)
-  data        data?     @relation(fields: [customer_id], references: [id])
-  customer_id Int?
-  service     service?  @relation(fields: [service_id], references: [id])
-  service_id  Int?
+  data        data      @relation(fields: [customer_id], references: [id], onDelete: SetDefault, onUpdate: SetDefault)
+  customer_id Int
+  service     service   @relation(fields: [service_id], references: [id], onDelete: SetDefault, onUpdate: SetDefault)
+  service_id  Int
   created_at  DateTime? @default(now()) @db.Timestamp()
 
   @@schema("customer")
@@ -56,10 +56,10 @@ model form {
 
 model service {
   id          Int       @id @default(autoincrement())
-  data        data?     @relation(fields: [customer_id], references: [id])
-  customer_id Int?
-  service     services? @relation(fields: [service_id], references: [id])
-  service_id  Int?
+  data        data      @relation(fields: [customer_id], references: [id], onDelete: SetDefault, onUpdate: SetDefault)
+  customer_id Int
+  service     services  @relation(fields: [service_id], references: [id], onDelete: SetDefault, onUpdate: SetDefault)
+  service_id  Int
   form        form[]
   created_at  DateTime? @default(now()) @db.Timestamp()
 
@@ -67,30 +67,30 @@ model service {
 }
 
 model forms {
-  id          Int        @id @default(autoincrement())
-  services    services?  @relation(fields: [service_id], references: [id])
-  service_id  Int?
-  questions   questions? @relation(fields: [question_id], references: [id])
-  question_id Int?
-  created_at  DateTime?  @default(now()) @db.Timestamp()
+  id          Int       @id @default(autoincrement())
+  services    services  @relation(fields: [service_id], references: [id], onDelete: SetDefault, onUpdate: SetDefault)
+  service_id  Int
+  questions   questions @relation(fields: [question_id], references: [id], onDelete: SetDefault, onUpdate: SetDefault)
+  question_id Int
+  created_at  DateTime? @default(now()) @db.Timestamp()
 
   @@schema("core")
 }
 
 model questions {
-  id             Int             @id @default(autoincrement())
-  question       String?         @db.VarChar(255)
+  id             Int            @id @default(autoincrement())
+  question       String         @db.VarChar(255)
   forms          forms[]
-  tpquestion     type_questions? @relation(fields: [tp_question_id], references: [id])
-  tp_question_id Int?
-  created_at     DateTime?       @default(now()) @db.Timestamp()
+  tpquestion     type_questions @relation(fields: [tp_question_id], references: [id], onDelete: SetDefault, onUpdate: SetDefault)
+  tp_question_id Int
+  created_at     DateTime?      @default(now()) @db.Timestamp()
 
   @@schema("core")
 }
 
 model services {
   id           Int       @id @default(autoincrement())
-  service_name String?   @db.VarChar(150)
+  service_name String    @db.VarChar(150)
   value        Decimal?  @db.Decimal(10, 2)
   service      service[]
   forms        forms[]
@@ -101,7 +101,7 @@ model services {
 
 model type_questions {
   id         Int         @id @default(autoincrement())
-  type       String?     @db.VarChar(50)
+  type       String      @db.VarChar(50)
   questions  questions[]
   created_at DateTime?   @default(now()) @db.Timestamp()
 
