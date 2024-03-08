@@ -13,16 +13,13 @@ describe("Ficha Anamnese API - Core Questions", () => {
     });
 
     it("should create new Question", async() => {
-        let tpQuestionId = await prisma.type_questions.findFirst();
-        if(!tpQuestionId){
-            tpQuestionId = await prisma.type_questions.create({
-                data: { type: "LGPD"}
-            });
-        }
+        const tpQuestId = await prisma.type_questions.create({
+            data: { type: "Type Test" },
+        });
 
         const res = await request(app).post("/api/questions/").send({ 
             question: "Permissão gravar dados ?",
-            tp_question_id: tpQuestionId.id,  
+            tp_question_id: tpQuestId.id,  
         });
         
         expect(res.status).toEqual(200);
@@ -31,7 +28,10 @@ describe("Ficha Anamnese API - Core Questions", () => {
     });
 
     it("should get the question by id", async () => {
-        const tpQuestId = await prisma.type_questions.findFirst();
+        const tpQuestId = await prisma.type_questions.create({
+            data: { type: "Type Test" },
+        });
+        
         const newQuest = await prisma.questions.create({
             data: {
                 question: "Já fez tintura ?", 
@@ -43,6 +43,7 @@ describe("Ficha Anamnese API - Core Questions", () => {
 
         expect(res.status).toEqual(200);
         expect(res.body).toHaveProperty("question");
+        //await prisma.type_questions.delete({ where: { id: tpQuestId.id } });
     });
 
     it("should get all the questions", async () => {
@@ -53,7 +54,9 @@ describe("Ficha Anamnese API - Core Questions", () => {
     });
 
     it("should update an existing question", async () => {
-        const tpQuestId = await prisma.type_questions.findFirst();
+        const tpQuestId = await prisma.type_questions.create({
+            data: { type: "Type Test" },
+        });
         
         const newQuest = await prisma.questions.create({
             data: {
@@ -69,11 +72,15 @@ describe("Ficha Anamnese API - Core Questions", () => {
             .send(updateQuestion);
 
         expect(res.status).toEqual(200);
-        expect(res.body.question).toEqual("Tem tatuagem ?");
+        expect(res.body.question).toEqual("Tem cicatrizes ?");
+        //await prisma.type_questions.delete({ where: { id: tpQuestId.id } });
     });
 
     it("should be delete an existing question", async () => {
-        const tpQuestId = await prisma.type_questions.findFirst();
+        const tpQuestId = await prisma.type_questions.create({
+            data: { type: "Type Test" },
+        });
+
         const newQuest = await prisma.questions.create({
             data: {
                 question: "Tem tatuagem ?", 
@@ -89,8 +96,8 @@ describe("Ficha Anamnese API - Core Questions", () => {
             where: { id: newQuest.id },
         });
 
-        expect(delQuest).toBeNull;
-        
+        expect(delQuest).toBeNull();
+        await prisma.type_questions.delete({ where: { id: tpQuestId.id } });
     });
 
 });

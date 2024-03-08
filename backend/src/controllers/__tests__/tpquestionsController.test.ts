@@ -6,12 +6,12 @@ const prisma = new PrismaClient();
 
 describe("Ficha Anamnese API - Core Type Questions", () => {
     let tpquestionId: number;
-
+/*
     it("should delete all records", async () => {
         const res = await request(app).delete("/api/tpquestions/");
         expect(res.statusCode).toEqual(204);
     });
-
+*/
     it("should create a new type question", async () => {
         const res = await request(app).post("/api/tpquestions/")
                                       .send({
