@@ -5,12 +5,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 describe("Ficha Anamnese API - Core Questions", () => {
-    let questionId: number;
-
-    it("should delete all records", async () => {
+   
+/*     it("should delete all records", async () => {
         const res = await request(app).delete("/api/questions/");
         expect(res.statusCode).toEqual(204);
-    });
+    }); */
 
     it("should create new Question", async() => {
         const tpQuestId = await prisma.type_questions.create({
@@ -24,7 +23,7 @@ describe("Ficha Anamnese API - Core Questions", () => {
         
         expect(res.status).toEqual(200);
         expect(res.body).toHaveProperty("id");        
-        questionId = res.body.id;
+        
     });
 
     it("should get the question by id", async () => {

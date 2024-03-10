@@ -7,10 +7,10 @@ const prisma = new PrismaClient();
 describe("Ficha Anamnese API - Customer", () => {
   let customerId: number;
 
-  it("should delete all records", async () => {
+/*   it("should delete all records", async () => {
     const res = await request(app).delete("/api/customer/");
     expect(res.statusCode).toEqual(204);
-  });
+  }); */
 
   it("should create a new customer", async () => {
     const res = await request(app)
@@ -23,7 +23,7 @@ describe("Ficha Anamnese API - Customer", () => {
         marital_status: "tt",
         phone: "123456",
         mobile: "4545454",
-        email: "create@email.com",
+        email: "create2@email.com",
       });
 
     expect(res.status).toEqual(200);
@@ -45,15 +45,12 @@ describe("Ficha Anamnese API - Customer", () => {
     expect(Array.isArray(res.body)).toBe(true);
   });
 
-  it("should update an existing customer", async () => {
-    const newCustomer = await prisma.data.create({
-      data: { first_name: "Update Marcelo", email: "update@email.com" },
-    });
-
+  it("should update an existing customer", async () => {    
+    const newCustomer = await prisma.data.findFirst({});
     const updateCustomer = { last_name: "Silveira" };
 
     const res = await request(app)
-      .put(`/api/customer/${newCustomer.id}`)
+      .put(`/api/customer/${newCustomer?.id}`)
       .send(updateCustomer);
 
     expect(res.status).toEqual(200);

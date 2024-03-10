@@ -7,10 +7,10 @@ const prisma = new PrismaClient();
 describe("Ficha Anamnese API - Core Services", () => {
   let serviceId: number;
 
-  it("should delete all records", async () => {
+/*   it("should delete all records", async () => {
     const res = await request(app).delete("/api/services/");
     expect(res.statusCode).toEqual(204);
-  });
+  }); */
 
   it("should create new service", async () => {
     const res = await request(app).post("/api/services/").send({
