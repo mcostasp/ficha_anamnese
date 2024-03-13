@@ -1,26 +1,46 @@
 version: "3.9"
 services: 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #   ports:
-  #     - "3000:3000"
-  #   networks:
-  #     - devlan
-  postgres_db:
+  api:
+    build:
+      context: ./backend
+    container_name: api
+    restart: always
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["npm","run","start"]
+    networks:
+      - devlan
+  db:
     image: postgres:latest
-    container_name: PostgresCont
+    container_name: db
     restart: always
     environment:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres123
         POSTGRES_DB: ficha_db
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d ficha_db'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3        
     ports:
       - "5432:5432"
     volumes:
-      - postgres_db:/var/lib/postgresql/data      
+      - postgres_db:/var/lib/postgresql/data    
+    networks:
+      - devlan
+
+networks:
+  devlan:
+    driver: bridge
 volumes:
   postgres_db:
+
 
   # pgadmin:
   #   container_name: PGAdminCont

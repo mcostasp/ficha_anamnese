@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+/* import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import createHttpError from 'http-errors';
 import { Logger } from '../utils/logger';
@@ -16,4 +16,4 @@ export const autheticateJWT = (req: Request, res: Response, next: NextFunction) 
     }else{
         res.status(401).json({ message: 'Unauthorized' });
     }
-};
+}; */
