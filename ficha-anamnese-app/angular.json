@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ficha-anamnese-frontend": {
+    "ficha-anamnese-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ficha-anamnese-frontend",
+            "outputPath": "dist/ficha-anamnese-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -27,9 +27,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/chart.js/dist/chart.js"
-            ],
+            "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -64,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ficha-anamnese-frontend:build:production"
+              "buildTarget": "ficha-anamnese-app:build:production"
             },
             "development": {
-              "buildTarget": "ficha-anamnese-frontend:build:development"
+              "buildTarget": "ficha-anamnese-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "ficha-anamnese-frontend:build"
+            "buildTarget": "ficha-anamnese-app:build"
           }
         },
         "test": {
@@ -100,6 +98,6 @@
     }
   },
   "cli": {
-    "analytics": "7689c494-3522-4dbe-abb5-dc2332bff1fe"
+    "analytics": "223361f6-1e9e-4260-b165-0d6ff3b09156"
   }
 }

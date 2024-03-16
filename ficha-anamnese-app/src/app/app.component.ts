@@ -9,5 +9,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Ficha Anamnese - Studio Beauty Iara Costa';
+  title = 'ficha-anamnese-app';
 }
