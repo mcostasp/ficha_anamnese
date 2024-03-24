@@ -11,7 +11,7 @@ import { Customer } from '../models/customer.model';
 export class CustomerService {
     private apiUrl = 'http://localhost:3000/api/customer';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     getCustomers(): Observable<Customer[]> {
         return this.http.get<Customer[]>(this.apiUrl);
@@ -21,7 +21,7 @@ export class CustomerService {
         return this.http.post<Customer>(this.apiUrl, customer);
     }
 
-    updateCustomer(customer: Customer): Observable<Car> {
+    updateCustomer(customer: Customer): Observable<Customer> {
         const url = `${this.apiUrl}/${customer.id}`;
         return this.http.put<Customer>(url, customer);
     }

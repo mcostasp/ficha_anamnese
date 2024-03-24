@@ -1,9 +1,15 @@
 import { HttpClient, HttpClientModule } from "@angular/common/http";
-import { NgModule, NgModule } from "@angular/core";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.modules";
 import { AppComponent } from "./app.component";
+
+
 import { CustomerListComponent } from "./components/customers/customer-list/customer-list.component";
+import { CustomerService } from "./services/customer.service";
+
+
 
 @NgModule({
     declarations: [
@@ -12,10 +18,12 @@ import { CustomerListComponent } from "./components/customers/customer-list/cust
     ],
     imports: [
         BrowserModule,
+        CommonModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        HttpClient
     ],
-    providers: [],
+    providers: [CustomerService],
     bootstrap: [AppComponent]
 })
 
