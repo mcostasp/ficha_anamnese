@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/ficha-anamnese-app",
             "index": "src/index.html",
-            "browser": "src/main.ts",            
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -27,7 +27,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/chart.js",
+              "node_modules/chart.js/dist/chart.js"
+            ]
           },
           "configurations": {
             "production": {

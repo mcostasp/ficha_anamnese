@@ -4,11 +4,10 @@ import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.modules";
 import { AppComponent } from "./app.component";
-
-
 import { CustomerListComponent } from "./components/customers/customer-list/customer-list.component";
 import { CustomerService } from "./services/customer.service";
-
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -21,7 +20,9 @@ import { CustomerService } from "./services/customer.service";
         CommonModule,
         AppRoutingModule,
         HttpClientModule,
-        HttpClient
+        HttpClient,
+        BrowserAnimationsModule,
+        FormsModule
     ],
     providers: [CustomerService],
     bootstrap: [AppComponent]

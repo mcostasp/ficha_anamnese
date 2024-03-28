@@ -1,0 +1,15 @@
+<p>customer-detail works!</p>
+<div *ngIf="customer">
+    <h2>{{ customer.first_name }} {{ customer.last_name }}</h2>
+    <ul>
+      <li><strong>Email:</strong> {{ customer.email }}</li>
+      <li><strong>Telefone:</strong> {{ customer.mobile }}</li>
+    </ul>
+    <!--
+    <button (click)="editCar()">Edit</button>
+    <button (click)="deleteCar()">Delete</button>
+    -->
+  </div>
+  <div *ngIf="!customer">
+    <p>Customer not found!</p>
+  </div>
